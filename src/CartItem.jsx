@@ -47,9 +47,13 @@ const CartItem = ({ onContinueShopping }) => {
     return (parseFloat(item.cost.substring(1)) * item.quantity).toFixed(2);
   };
 
+  const cartItems = useSelector((state) => state.cart.items);
+  const cartQuantity = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+
   return (
     <div className="cart-container">
       <h2 style={{ color: 'black' }}>Total Cart Amount: ${calculateTotalAmount()}</h2>
+      <h2 style={{ color: 'black' }}>Total Cart Quantity: {cartQuantity}</h2>
       <div>
         {cart.map(item => (
           <div className="cart-item" key={item.name}>
